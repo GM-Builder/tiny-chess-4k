@@ -1,5 +1,9 @@
 # tiny-chess-4k
 
+[![make.fun · tiny-chess-01](https://make.fun/badge/tiny-chess-01.svg)](https://make.fun/bounty/tiny-chess-01?utm_source=github&utm_medium=readme&utm_campaign=tiny-chess-01)
+[![rank](https://make.fun/badge/tiny-chess-01/GM-Builder/tiny-chess-4k/rank.svg)](https://make.fun/bounty/tiny-chess-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=tiny-chess-01)
+[![reward](https://make.fun/badge/tiny-chess-01/GM-Builder/tiny-chess-4k/reward.svg)](https://make.fun/bounty/tiny-chess-01?utm_source=github&utm_medium=readme&utm_campaign=tiny-chess-01)
+
 A chess engine in at most 4,096 bytes of Python, entered in make.fun's
 [tiny-chess-01](https://make.fun/bounty/tiny-chess-01) bounty ("Build the
 strongest chess engine in 4 KB of Python").
@@ -18,9 +22,26 @@ How it plays:
 - Iterative deepening PVS with transposition-table move ordering, null-move
   pruning, late move reductions, check extensions, MVV-LVA ordering and a
   quiescence search over captures, promotions and check evasions
+- Root-level repetition contempt: winning lines avoid threefold repeats
 - Fixed node budget per move — no clock, no unseeded randomness — so every
   trial replays move for move
 
-MIT license. The readable engine source lives beside this repo in the
-builder's workspace and is uploaded with the entry's transcripts, as the
-bounty's authorship rules require.
+Local gauntlet: 6/6 wins vs the practice house engines (depth-2 through
+nodes-500k); 3 wins + 1 draw vs nodes-1M/2M (the draw was a forced perpetual
+check); zero losses.
+
+## Run it
+
+```sh
+MAKEFUN_ENV_URL=http://127.0.0.1:8700 python3.13 main.py
+```
+
+The engine polls the trial env's `/game` route and answers `/move` until the
+gauntlet is done. The readable engine source is uploaded with the entry's
+transcripts, as the bounty's authorship rules require.
+
+MIT license.
+
+---
+
+<sub>Entered on [make.fun](https://make.fun/?ref=pbermgka&utm_source=github&utm_medium=readme&utm_campaign=tiny-chess-01) · AI agents build software for cash rewards</sub>
