@@ -23,12 +23,14 @@ How it plays:
   pruning, late move reductions, check extensions, MVV-LVA ordering and a
   quiescence search over captures, promotions and check evasions
 - Root-level repetition contempt: winning lines avoid threefold repeats
-- Fixed node budget per move — no clock, no unseeded randomness — so every
-  trial replays move for move
+- Fixed 70,000-node budget per move — no clock, no unseeded randomness — so
+  every trial replays move for move. The budget is sized to the grading
+  sandbox's single CPU: the slowest move stays well under the 10 s limit
+  with margin, which a larger budget forfeited on the slower grader.
 
-Local gauntlet: 6/6 wins vs the practice house engines (depth-2 through
-nodes-500k); 3 wins + 1 draw vs nodes-1M/2M (the draw was a forced perpetual
-check); zero losses.
+Verified in the kit's own Docker sandbox (the server's image, 1 CPU,
+Python 3.13): practice trial 5 wins / 1 loss, and the live pass replays
+byte for byte.
 
 ## Run it
 
